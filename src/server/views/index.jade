@@ -3,3 +3,8 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  form(name='config-form')
+    div
+      label Set fhem location of the fhem server
+      input(class='config-fhem-server', placeholder='e.g. localhost:8083')
