@@ -6,11 +6,6 @@
     "start": "node ./build/server",
     "dev": "webpack --progress --colors --watch"
   },
-  "babel": {
-    "presets": [
-      "es2015"
-    ]
-  },
   "dependencies": {
     "body-parser": "~1.13.2",
     "cookie-parser": "~1.3.5",

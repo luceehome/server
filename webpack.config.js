@@ -1,5 +1,12 @@
 const commonLoaders = [
-  {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'}
+  {
+    test: /\.js$/,
+    exclude: /node_modules/,
+    loader: 'babel-loader',
+    query: {
+      presets: ['es2015']
+    }
+  }
 ];
 
 module.exports = [
@@ -9,7 +16,8 @@ module.exports = [
     target: 'node',
     output: {
       path: __dirname + '/build',
-      filename: 'server.js'
+      filename: 'server.js',
+      libraryTarget: 'commonjs'
     },
     module: {
       loaders: [
