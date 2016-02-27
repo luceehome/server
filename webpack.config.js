@@ -1,5 +1,3 @@
-const path = require('path');
-
 module.exports = [
   {
     name: 'server',
@@ -7,12 +5,12 @@ module.exports = [
     target: 'node',
     output: {
       path: __dirname + '/build/server',
-      filename: 'index.js',
-      libraryTarget: 'commonjs2'
+      filename: 'index.js'
     },
     module: {
       loaders: [
-        {test: /\.json$/, loader: 'json-loader'}
+        {test: /\.json$/, loader: 'json-loader'},
+        {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'}
       ]
     },
     externals: /^[a-z\-0-9]+$/,
