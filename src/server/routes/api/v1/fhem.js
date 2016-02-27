@@ -1,20 +1,10 @@
 import express from 'express';
-import request from 'request';
+import fhemHttp from '../../../modules/fhem-http';
 
 const router = express.Router();
 
 router.patch('/', (req, res) => {
-  const location = 'http://' + req.body.location;
-
-  request.get(location, error => {
-    if (error) {
-      console.error(`An error occurred for location ${location}.`);
-    }
-    else {
-      console.info(`Found fhem instance at ${location}`);
-    }
-  });
-
+  fhemHttp.location = 'http://' + req.body.location;
   res.send('Hello World!');
 });
 
