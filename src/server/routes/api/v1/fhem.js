@@ -4,14 +4,14 @@ import request from 'request';
 const router = express.Router();
 
 router.patch('/', (req, res) => {
-  const address = 'http://' + req.body.address;
+  const location = 'http://' + req.body.location;
 
-  request.get(address, error => {
+  request.get(location, error => {
     if (error) {
-      console.error('An error occurred. Check the provided address.', error);
+      console.error(`An error occurred for location ${location}.`);
     }
     else {
-      console.info('Found fhem instance at ', address);
+      console.info(`Found fhem instance at ${location}`);
     }
   });
 

@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 $(() => {
-  const fhemServerInput = $('.config-fhem-server');
+  const locationInput = $('.config-fhem-location');
 
   $('form').submit(event => {
     event.preventDefault();
@@ -11,7 +11,7 @@ $(() => {
       contentType: 'application/json',
       dataType: 'json',
       data: JSON.stringify({
-        address: fhemServerInput.val()
+        location: locationInput.val()
       })
     });
   });
