@@ -1,23 +1,22 @@
-import request from 'request';
+import rxRequest from './rx-request';
 
 var location;
 const fhemHttp = {
-  set location(value) {
-    request.get(value, error => {
-      if (error) {
-        console.error(`An error occurred for location ${value}.`);
+  set location(path) {
+    rxRequest.get(path).subscribe(
+      () => {
+        location = path;
+        console.info(`Found fhem instance at ${path}`);
+      },
+      () => {
+        console.error(`An error occurred for location ${path}.`);
       }
-      else {
-        location = value;
-        console.info(`Found fhem instance at ${value}`);
-      }
-    });
+    );
   },
 
-  command(command, callback = () => {}) {
-    //TODO: Throw an error if location is not set
+  command(command) {
     if (location) {
-      request.get(`${location}/fhem?cmd=${command}`, callback);
+      return rxRequest.get(`${location}/fhem?cmd=${command}`);
     }
   }
 };
