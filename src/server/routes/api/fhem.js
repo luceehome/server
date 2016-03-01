@@ -1,5 +1,5 @@
 import express from 'express';
-import fhemHttp from '../../../modules/fhem-http';
+import fhemHttp from '../../modules/fhem-http';
 
 const router = express.Router();
 
