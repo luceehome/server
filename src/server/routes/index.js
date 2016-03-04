@@ -1,18 +1,16 @@
-import fs from 'fs';
 import express from 'express';
+import config from './../modules/config';
 
 const router = express.Router();
 
 router.get('/', function (req, res) {
   var fhemLocation = '';
 
-  fs.readFile('./build/config.json', (err, data) => {
-    if (!err) {
-      fhemLocation = JSON.parse(data).fhemLocation;
-    }
-
-    res.render('index', {fhemLocation: fhemLocation});
-  });
+  config.getValue('fhemLocation').subscribe(
+    value => fhemLocation = value,
+    err => console.log(`An error occurred while setting fhemLocation: ${err}`),
+    () => res.render('index', {fhemLocation: fhemLocation})
+  );
 });
 
 module.exports = router;

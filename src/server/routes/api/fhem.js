@@ -1,33 +1,17 @@
-import fs from 'fs';
 import express from 'express';
-import fhemHttp from '../../modules/fhem-http';
+import fhemHttp from './../../modules/fhem-http';
+import config from './../../modules/config';
 
 const router = express.Router();
 
 router.patch('/', (req, res) => {
-  fhemHttp.setLocation(req.body.location).subscribe(
-    () => {
-      const file = './build/config.json';
+  const location = req.body.location;
+  const success = () => res.json({success: true});
+  const failure = () => res.json({success: false});
 
-      fs.writeFile(file, JSON.stringify({
-          fhemLocation: req.body.location
-        }),
-        (err) => {
-          if (err) {
-            console.log(`An error occurred writing ${file}`);
-            res.json({success: false});
-
-            throw err;
-          }
-          else {
-            console.log(`${file} written`);
-            res.json({success: true});
-          }
-        });
-    },
-    () => {
-      res.json({success: false});
-    }
+  fhemHttp.setLocation(location).subscribe(
+    () => config.setValue('fhemLocation', location).subscribe(success, failure),
+    failure
   );
 });
 
