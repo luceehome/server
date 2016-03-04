@@ -11,7 +11,7 @@ router.get('/', function (req, res) {
       fhemLocation = JSON.parse(data).fhemLocation;
     }
 
-    res.render('index', {title: 'Express', fhemLocation: fhemLocation});
+    res.render('index', {fhemLocation: fhemLocation});
   });
 });
 

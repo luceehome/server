@@ -1,10 +1,14 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Config
 
   form(name='config-form')
     div
-      label Set fhem location of the fhem server
+      label Set the location of the fhem server
       input(class='config-fhem-location', placeholder='e.g. http://localhost:8083', value=fhemLocation)
+
+      if fhemLocation
+        span(class='config-status', style='color:green') OK
+      else
+        span(class='config-status')
