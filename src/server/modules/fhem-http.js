@@ -1,5 +1,6 @@
 import rx from 'rx';
 import rxRequest from './rx-request';
+import config from './config';
 
 var location;
 const fhemHttp = {
@@ -20,10 +21,10 @@ const fhemHttp = {
   },
 
   command(command) {
-    if (location) {
-      return rxRequest.get(`${location}/fhem?cmd=${command}`);
-    }
+    return rxRequest.get(`${location}/fhem?cmd=${command}`);
   }
 };
+
+config.getValue('fhemLocation').subscribe(fhemHttp.setLocation);
 
 export default fhemHttp;

@@ -2,14 +2,14 @@ import rx from 'rx';
 import request from 'request';
 
 const rxRequest = {
-  get(path) {
+  get(url) {
     return rx.Observable.create(observer => {
-      request.get(path, (error, response, body) => {
+      request.get({url:url, json:true}, (error, response, body) => {
         if (error) {
-          observer.onError(response, error);
+          observer.onError(error, response);
         }
         else {
-          observer.onNext(response, body);
+          observer.onNext(body, response);
         }
         observer.onCompleted();
       });
