@@ -14,4 +14,17 @@ router.get('/', (req, res) => {
   );
 });
 
+router.get('/:name', (req, res) => {
+  const name = req.params.name;
+
+  fhemJsonlist2.byName(name).subscribe(
+    device => {
+      res.json({success: true, data: device});
+    },
+    error => {
+      res.json({success: false, error: 'There is an error, bro.'})
+    }
+  );
+});
+
 export default router;
