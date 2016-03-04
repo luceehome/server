@@ -7,8 +7,9 @@ block content
     div
       label Set the location of the fhem server
       input(class='config-fhem-location', placeholder='e.g. http://localhost:8083', value=fhemLocation)
+      button(type='submit') Send
 
-      if fhemLocation
-        span(class='config-status', style='color:green') OK
-      else
-        span(class='config-status')
+  if fhemLocation
+    div(class='config-status', style='color:green') OK
+  else
+    div(class='config-status')
