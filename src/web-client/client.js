@@ -3,10 +3,7 @@ import $ from 'jquery';
 $(() => {
   const $location = $('.config-fhem-location');
   const $status = $('.config-status');
-
-  $('form').submit(event => {
-    event.preventDefault();
-
+  const checkState = () => {
     $.ajax('/api/fhem', {
       method: 'PATCH',
       contentType: 'application/json',
@@ -24,5 +21,12 @@ $(() => {
         $status.css('color', 'red');
       }
     });
+  };
+
+  checkState();
+
+  $('form').submit(event => {
+    event.preventDefault();
+    checkState();
   });
 });
