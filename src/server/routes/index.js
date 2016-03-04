@@ -1,9 +1,18 @@
-var express = require('express');
-var router = express.Router();
+import fs from 'fs';
+import express from 'express';
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+const router = express.Router();
+
+router.get('/', function (req, res) {
+  var fhemLocation = '';
+
+  fs.readFile('./build/config.json', (err, data) => {
+    if (!err) {
+      fhemLocation = JSON.parse(data).fhemLocation;
+    }
+
+    res.render('index', {title: 'Express', fhemLocation: fhemLocation});
+  });
 });
 
 module.exports = router;
