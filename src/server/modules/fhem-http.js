@@ -1,9 +1,12 @@
+import rx from 'rx';
 import rxRequest from './rx-request';
 
 var location;
 const fhemHttp = {
-  set location(path) {
-    rxRequest.get(path).subscribe(
+  setLocation(path) {
+    const check = rxRequest.get(path);
+
+    check.subscribe(
       () => {
         location = path;
         console.info(`Found fhem instance at ${path}`);
@@ -12,6 +15,8 @@ const fhemHttp = {
         console.error(`An error occurred for location ${path}.`);
       }
     );
+
+    return check;
   },
 
   command(command) {
