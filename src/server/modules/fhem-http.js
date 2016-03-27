@@ -4,12 +4,19 @@ import config from './config';
 
 var location;
 const fhemHttp = {
+  get location() {
+    return location;
+  },
+
   setLocation(path) {
+    return fhemHttp.check(path).subscribe(_ => location = path);
+  },
+
+  check(path = location) {
     const check = rxRequest.get(path);
 
     check.subscribe(
       () => {
-        location = path;
         console.info(`Found fhem instance at ${path}.`);
       },
       () => {

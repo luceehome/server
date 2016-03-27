@@ -4,9 +4,8 @@ import rx from 'rx';
 const file = './build/config.json';
 const config = {
   getValues() {
-    return rx.Observable.fromNodeCallback(fs.readFile)(file).map(
-      data => JSON.parse(data)
-    );
+    return rx.Observable.fromNodeCallback(fs.readFile)(file)
+      .map(data => JSON.parse(data));
   },
 
   setValues(values) {
@@ -16,10 +15,10 @@ const config = {
   setValue(name, value) {
     const subject = new rx.Subject();
 
-    this.getValues().subscribe(
+    config.getValues().subscribe(
       values => {
         values[name] = value;
-        this.setValues(values).subscribe(subject);
+        config.setValues(values).subscribe(subject);
       }
     );
 
@@ -27,9 +26,7 @@ const config = {
   },
 
   getValue(name){
-    return this.getValues().map(
-      values => values[name]
-    );
+    return config.getValues().map(values => values[name]);
   }
 };
 
