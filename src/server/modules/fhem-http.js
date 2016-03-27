@@ -10,10 +10,10 @@ const fhemHttp = {
     check.subscribe(
       () => {
         location = path;
-        console.info(`Found fhem instance at ${path}`);
+        console.info(`Found fhem instance at ${path}.`);
       },
       () => {
-        console.error(`An error occurred for location ${path}.`);
+        console.error(`No fhem instance found at ${path}.`);
       }
     );
 
