@@ -1,5 +1,5 @@
 # LUCEE Server
-A server for https://github.com/beautifycode/lucylee
+The server for luceehome.
 
 ## Requirements
  - node v5.4.1 or higher
