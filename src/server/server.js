@@ -27,6 +27,8 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
+console.log('API server running on port '+ port);
+
 /**
  * Normalize a port into a number, string, or false.
  */
