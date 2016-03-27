@@ -9,7 +9,10 @@ const fhemHttp = {
   },
 
   setLocation(path) {
-    return fhemHttp.check(path).subscribe(_ => location = path);
+    const check = fhemHttp.check(path);
+    check.subscribe(_ => location = path);
+
+    return check;
   },
 
   check(path = location) {
