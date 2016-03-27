@@ -10,6 +10,7 @@ import users from './routes/users';
 import fhem from './routes/api/fhem';
 import devices from './routes/api/devices';
 import status from './routes/api/status';
+import cmd from './routes/api/cmd';
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use('/users', users);
 app.use('/api/fhem', fhem);
 app.use('/api/devices', devices);
 app.use('/api/status', status);
+app.use('/api/cmd', cmd);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
