@@ -6,7 +6,7 @@
     "start": "node ./build/server",
     "dev": "webpack --progress --colors --watch",
     "build": "webpack --progress --colors",
-    "postinstall": "build"
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "body-parser": "1.13.2",
