@@ -4,8 +4,12 @@ import rx from 'rx';
 const file = './build/config.json';
 const config = {
   getValues() {
-    return rx.Observable.fromNodeCallback(fs.readFile)(file)
-      .map(data => JSON.parse(data));
+    return rx.Observable.fromNodeCallback(fs.readFile)(file).map(data => {
+      if (!data.length) {
+        data = '{}';
+      }
+      return JSON.parse(data);
+    });
   },
 
   setValues(values) {
@@ -15,8 +19,7 @@ const config = {
   setValue(name, value) {
     const subject = new rx.Subject();
 
-    config.getValues().subscribe(
-      values => {
+    config.getValues().subscribe(values => {
         values[name] = value;
         config.setValues(values).subscribe(subject);
       }
@@ -29,5 +32,7 @@ const config = {
     return config.getValues().map(values => values[name]);
   }
 };
+
+fs.openSync(file, 'a');
 
 export default config;
