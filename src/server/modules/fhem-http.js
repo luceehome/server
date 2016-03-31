@@ -23,7 +23,8 @@ const fhemHttp = {
         console.info(`Found fhem instance at ${path}.`);
       },
       () => {
-        console.error(`No fhem instance found at ${path}.`);
+        console.error(path ? `No fhem instance found at ${path}.`
+          : 'No location defined. Please configure the fhem location at http://localhost:3000');
       }
     );
 
